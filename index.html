@@ -1,0 +1,819 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="ホームページ制作のためのヒアリングツール。カンタン選択式でお客様の要望を教えてください。">
+  <title>ホームページ制作ヒアリングツール</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- モバイルブラウザでのレンダリングを最適化するためのメタタグ -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>ホームページ制作ヒアリングツール</h1>
+      <p>選択式でカンタンに回答できます。お客様のホームページ制作に関する要望をお聞かせください。</p>
+    </header>
+
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress" id="progress-bar" style="width: 0%"></div>
+      </div>
+      <div class="progress-text">
+        <span id="current-section">セクション: 0/10</span>
+        <span id="progress-percentage">0%</span>
+      </div>
+    </div>
+
+    <div id="questionnaire">
+      <!-- ウェルカムページ -->
+      <div class="section" id="section-welcome">
+        <div class="question-container welcome-container">
+          <div class="company-logo">
+            <h1 class="company-name">komohanaworks</h1>
+          </div>
+          <h2 class="section-title">ようこそ</h2>
+          
+          <div class="welcome-content">
+            <p class="welcome-text">ホームページ制作ヒアリングツールへようこそ！</p>
+            <p>このツールは、お客様のホームページ制作に関する要望を簡単に伝えていただくためのものです。</p>
+            <p>各セクションで質問に答えていくことで、理想のホームページに必要な要素を明確にしていきます。</p>
+            <p>多くの質問は選択式になっているので、簡単に回答できます。</p>
+            <p>ぜひ最後まで回答して、あなたのビジョンを私たちに伝えてください！</p>
+          </div>
+          
+          <div class="welcome-features">
+            <div class="feature-item">
+              <div class="feature-icon">📋</div>
+              <div class="feature-text">
+                <h3>カンタン入力</h3>
+                <p>ほとんどの質問は選択するだけで回答できます</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">⏱️</div>
+              <div class="feature-text">
+                <h3>時間節約</h3>
+                <p>面倒な記述式を最小限に抑えました</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">📝</div>
+              <div class="feature-text">
+                <h3>要望の整理</h3>
+                <p>あなたの要望を整理してまとめます</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="navigation welcome-navigation">
+          <button class="start-btn" id="start-btn">ヒアリングを始める</button>
+        </div>
+      </div>
+
+      <!-- セクション 0: 既存サイトの確認 -->
+      <div class="section hidden" id="section-0">
+        <div class="question-container">
+          <h2 class="section-title">既存サイトについて</h2>
+          
+          <div class="question">
+            <h3 class="question-title">現在、ホームページをお持ちですか？</h3>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="has-website" id="has-website-yes" value="あり">
+                <label for="has-website-yes">はい、持っています</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="has-website" id="has-website-no" value="なし">
+                <label for="has-website-no">いいえ、持っていません</label>
+              </div>
+            </div>
+          </div>
+          
+          <div id="existing-website-section" class="hidden">
+            <div class="question">
+              <h3 class="question-title">現在のホームページのURLを教えてください</h3>
+              <input type="url" id="website-url" name="website-url" placeholder="例: https://www.example.co.jp">
+              <p class="hint">httpsまたはhttpから始まるURLを入力してください</p>
+            </div>
+            
+            <div class="question">
+              <h3 class="question-title">現在のサイトの課題点・改善したい点</h3>
+              <div id="website-issues-container">
+                <textarea id="website-issues" name="website-issues" placeholder="例: デザインが古い、スマホ対応していない、問い合わせが少ない、更新が難しい、など"></textarea>
+              </div>
+            </div>
+            
+            <div class="question">
+              <h3 class="question-title">現在のサイトで継続したい・残したい要素</h3>
+              <textarea id="website-keep" name="website-keep" placeholder="例: コンテンツの一部、特定のページ構成、ブランドイメージなど"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="next-btn" id="next-btn-0">次へ</button>
+        </div>
+      </div>
+
+      <!-- セクション 1: 基本情報 -->
+      <div class="section hidden" id="section-1">
+        <div class="top-navigation">
+          <button class="back-btn" id="back-btn-1-top">前へ</button>
+          <button class="next-btn" id="next-btn-1-top">次へ</button>
+        </div>
+        <div class="question-container">
+          <h2 class="section-title">基本情報</h2>
+          
+          <div class="question">
+            <h3 class="question-title">会社・店舗名</h3>
+            <input type="text" id="company-name" name="company-name" placeholder="例: 株式会社サンプル">
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">会社ロゴの有無</h3>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="has-logo" id="has-logo-yes" value="あり">
+                <label for="has-logo-yes">あり</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="has-logo" id="has-logo-no" value="なし">
+                <label for="has-logo-no">なし</label>
+              </div>
+            </div>
+            <div id="logo-upload-section" class="hidden">
+              <div class="file-upload-container">
+                <label for="logo-file" class="file-upload-label">ロゴファイルをアップロード</label>
+                <input type="file" id="logo-file" name="logo-file" accept="image/*,.pdf,.ai,.eps">
+                <p class="hint">※jpg, png, pdf, ai, eps形式のファイルがアップロード可能です</p>
+              </div>
+            </div>
+            <textarea id="logo-details" name="logo-details" placeholder="ある場合は詳細を記入してください。例: ロゴデータの形式、ブランドガイドラインの有無など" class="hidden"></textarea>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">業種・業界</h3>
+            <select id="industry" name="industry">
+              <option value="">選択してください</option>
+              <option value="製造業">製造業</option>
+              <option value="小売業">小売業</option>
+              <option value="サービス業">サービス業</option>
+              <option value="IT・通信">IT・通信</option>
+              <option value="建設・不動産">建設・不動産</option>
+              <option value="金融・保険">金融・保険</option>
+              <option value="医療・福祉">医療・福祉</option>
+              <option value="教育">教育</option>
+              <option value="飲食業">飲食業</option>
+              <option value="その他">その他</option>
+            </select>
+            <input type="text" id="industry-other" name="industry-other" placeholder="その他の場合は詳細を記入してください" class="hidden">
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">企業理念・ミッション</h3>
+            <textarea id="company-mission" name="company-mission" placeholder="例: 「信頼と革新を通じて、社会に貢献する」"></textarea>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">代表者情報</h3>
+            <div class="representative-fields">
+              <div class="representative-field">
+                <label for="representative-name">氏名</label>
+                <input type="text" id="representative-name" name="representative-name" placeholder="例: 山田太郎">
+              </div>
+              <div class="representative-field">
+                <label for="representative-position">役職</label>
+                <input type="text" id="representative-position" name="representative-position" placeholder="例: 代表取締役社長">
+              </div>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">本社所在地</h3>
+            <div class="address-fields">
+              <div class="postal-code">
+                <label for="postal-code">郵便番号</label>
+                <input type="text" id="postal-code" name="postal-code" placeholder="例: 100-0001">
+              </div>
+              <div class="prefecture">
+                <label for="prefecture">都道府県</label>
+                <select id="prefecture" name="prefecture">
+                  <option value="">選択してください</option>
+                  <option value="北海道">北海道</option>
+                  <option value="青森県">青森県</option>
+                  <option value="岩手県">岩手県</option>
+                  <option value="宮城県">宮城県</option>
+                  <option value="秋田県">秋田県</option>
+                  <option value="山形県">山形県</option>
+                  <option value="福島県">福島県</option>
+                  <option value="茨城県">茨城県</option>
+                  <option value="栃木県">栃木県</option>
+                  <option value="群馬県">群馬県</option>
+                  <option value="埼玉県">埼玉県</option>
+                  <option value="千葉県">千葉県</option>
+                  <option value="東京都">東京都</option>
+                  <option value="神奈川県">神奈川県</option>
+                  <option value="新潟県">新潟県</option>
+                  <option value="富山県">富山県</option>
+                  <option value="石川県">石川県</option>
+                  <option value="福井県">福井県</option>
+                  <option value="山梨県">山梨県</option>
+                  <option value="長野県">長野県</option>
+                  <option value="岐阜県">岐阜県</option>
+                  <option value="静岡県">静岡県</option>
+                  <option value="愛知県">愛知県</option>
+                  <option value="三重県">三重県</option>
+                  <option value="滋賀県">滋賀県</option>
+                  <option value="京都府">京都府</option>
+                  <option value="大阪府">大阪府</option>
+                  <option value="兵庫県">兵庫県</option>
+                  <option value="奈良県">奈良県</option>
+                  <option value="和歌山県">和歌山県</option>
+                  <option value="鳥取県">鳥取県</option>
+                  <option value="島根県">島根県</option>
+                  <option value="岡山県">岡山県</option>
+                  <option value="広島県">広島県</option>
+                  <option value="山口県">山口県</option>
+                  <option value="徳島県">徳島県</option>
+                  <option value="香川県">香川県</option>
+                  <option value="愛媛県">愛媛県</option>
+                  <option value="高知県">高知県</option>
+                  <option value="福岡県">福岡県</option>
+                  <option value="佐賀県">佐賀県</option>
+                  <option value="長崎県">長崎県</option>
+                  <option value="熊本県">熊本県</option>
+                  <option value="大分県">大分県</option>
+                  <option value="宮崎県">宮崎県</option>
+                  <option value="鹿児島県">鹿児島県</option>
+                  <option value="沖縄県">沖縄県</option>
+                </select>
+              </div>
+            </div>
+            <div class="address-detail">
+              <label for="city">市区町村</label>
+              <input type="text" id="city" name="city" placeholder="例: 千代田区">
+            </div>
+            <div class="address-detail">
+              <label for="street-address">番地・建物名</label>
+              <input type="text" id="street-address" name="street-address" placeholder="例: 千代田1-1-1 サンプルビル5F">
+            </div>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">連絡先情報</h3>
+            <div class="contact-fields">
+              <div class="contact-field equal-width">
+                <label for="phone">電話番号</label>
+                <input type="tel" id="phone" name="phone" placeholder="例: 03-1234-5678">
+              </div>
+              <div class="contact-field equal-width">
+                <label for="fax">FAX（任意）</label>
+                <input type="tel" id="fax" name="fax" placeholder="例: 03-1234-5679">
+              </div>
+              <div class="contact-field equal-width">
+                <label for="email">メールアドレス</label>
+                <input type="email" id="email" name="email" placeholder="例: info@example.co.jp">
+              </div>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">支店・営業所の有無</h3>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="has-branch" id="has-branch-yes" value="あり">
+                <label for="has-branch-yes">あり</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="has-branch" id="has-branch-no" value="なし">
+                <label for="has-branch-no">なし</label>
+              </div>
+            </div>
+            <textarea id="branch-details" name="branch-details" placeholder="ある場合は詳細を記入してください。例: 大阪支店、名古屋営業所など" class="hidden"></textarea>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">設立年月日</h3>
+            <input type="text" id="foundation-date" name="foundation-date" placeholder="例: 2000年4月1日">
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">従業員数</h3>
+            <input type="number" id="employee-count" name="employee-count" placeholder="例: 50">
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">資本金</h3>
+            <input type="text" id="capital" name="capital" placeholder="例: 1,000万円">
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="back-btn" id="back-btn-1">前へ</button>
+          <button class="home-btn" id="home-btn-1-bottom">TOPページへ戻る</button>
+          <button class="next-btn" id="next-btn-1">次へ</button>
+        </div>
+      </div>
+      
+      <!-- セクション 2: ウェブサイトの目的と目標 -->
+      <div class="section hidden" id="section-2">
+        <div class="top-navigation">
+          <button class="back-btn" id="back-btn-2-top">前へ</button>
+          <button class="next-btn" id="next-btn-2-top">次へ</button>
+        </div>
+        <div class="question-container">
+          <h2 class="section-title">サイトの目的と目標</h2>
+          
+          <div class="question">
+            <h3 class="question-title">ホームページ制作の主な目的</h3>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="purpose-info" name="purpose[]" value="情報提供">
+                <label for="purpose-info">情報提供</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="purpose-inquiry" name="purpose[]" value="問い合わせ獲得">
+                <label for="purpose-inquiry">問い合わせ獲得</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="purpose-sales" name="purpose[]" value="販売促進">
+                <label for="purpose-sales">販売促進</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="purpose-branding" name="purpose[]" value="ブランディング">
+                <label for="purpose-branding">ブランディング</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="purpose-recruitment" name="purpose[]" value="採用活動">
+                <label for="purpose-recruitment">採用活動</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="purpose-other" name="purpose[]" value="その他">
+                <label for="purpose-other">その他</label>
+              </div>
+            </div>
+            <input type="text" id="purpose-other-detail" name="purpose-other-detail" placeholder="その他の場合は詳細を記入してください" class="hidden">
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">サイトに期待する成果</h3>
+            <div id="expected-outcome-container">
+              <textarea id="expected-outcome" name="expected-outcome" placeholder="例: 月間問い合わせ数30件の獲得、認知度向上、オンライン予約システムの導入など"></textarea>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">ターゲットとなる訪問者</h3>
+            <div id="target-audience-container">
+              <textarea id="target-audience" name="target-audience" placeholder="例: 30〜50代の経営者、20代の就活生、子育て世代の主婦など"></textarea>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">訪問者に取ってほしいアクション</h3>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="action-contact" name="action[]" value="問い合わせ">
+                <label for="action-contact">問い合わせ</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="action-document" name="action[]" value="資料請求">
+                <label for="action-document">資料請求</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="action-purchase" name="action[]" value="購入・申し込み">
+                <label for="action-purchase">購入・申し込み</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="action-subscription" name="action[]" value="メルマガ登録">
+                <label for="action-subscription">メルマガ登録</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="action-download" name="action[]" value="ダウンロード">
+                <label for="action-download">ダウンロード</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="action-other" name="action[]" value="その他">
+                <label for="action-other">その他</label>
+              </div>
+            </div>
+            <input type="text" id="action-other-detail" name="action-other-detail" placeholder="その他の場合は詳細を記入してください" class="hidden">
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">サイトの雰囲気</h3>
+            <div id="site-atmosphere-container">
+              <textarea id="site-atmosphere" name="site-atmosphere" placeholder="例: プロフェッショナルな印象、親しみやすい雰囲気、高級感のあるデザイン、など"></textarea>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">希望するカラーテーマ（複数選択可）</h3>
+            <div id="color-theme-container">
+              <textarea id="color-theme" name="color-theme" placeholder="例: 企業カラー（青と白）を基調に、モダンで清潔感のあるデザイン"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="back-btn" id="back-btn-2">前へ</button>
+          <button class="home-btn" id="home-btn-2-bottom">TOPページへ戻る</button>
+          <button class="next-btn" id="next-btn-2">次へ</button>
+        </div>
+      </div>
+      
+      <!-- セクション 3: デザインと見た目 -->
+      <div class="section hidden" id="section-3">
+        <div class="top-navigation">
+          <button class="back-btn" id="back-btn-3-top">前へ</button>
+          <button class="next-btn" id="next-btn-3-top">次へ</button>
+        </div>
+        <div class="question-container">
+          <h2 class="section-title">デザインと見た目</h2>
+          
+          <div class="question">
+            <h3 class="question-title">好みのデザインテイストやイメージを教えてください（複数選択可）</h3>
+            <div class="options">
+              <button type="button" class="option-btn multi-select" data-value="モダン">モダン</button>
+              <button type="button" class="option-btn multi-select" data-value="クラシック">クラシック</button>
+              <button type="button" class="option-btn multi-select" data-value="シンプル">シンプル</button>
+              <button type="button" class="option-btn multi-select" data-value="華やか">華やか</button>
+              <button type="button" class="option-btn multi-select" data-value="クール">クール</button>
+              <button type="button" class="option-btn multi-select" data-value="ポップ">ポップ</button>
+              <button type="button" class="option-btn multi-select" data-value="高級感">高級感</button>
+              <button type="button" class="option-btn multi-select" data-value="カジュアル">カジュアル</button>
+            </div>
+            <input type="hidden" id="design-taste" name="design-taste">
+            <input type="text" id="design-taste-other" name="design-taste-other" placeholder="他にイメージがあれば記入してください" class="mt-3">
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">使用したいブランドカラーや色のイメージはありますか？</h3>
+            <div class="form-group">
+              <label for="brand-colors">会社のブランドカラーがあれば教えてください</label>
+              <textarea id="brand-colors" name="brand-colors" rows="2" placeholder="例：メインカラー：青（#0066CC）、サブカラー：グレー（#F2F2F2）"></textarea>
+              <button type="button" class="entrust-btn">デザイナーにお任せ</button>
+              <div class="color-pickers-container" id="color-pickers-container">
+                <!-- カラーピッカーは既に実装済み -->
+              </div>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">参考にしたいウェブサイトの例はありますか？</h3>
+            <div id="reference-sites-container">
+              <textarea id="reference-sites" name="reference-sites" placeholder="URLをいくつか記入してください。参考にしたい点も記載いただけると助かります。"></textarea>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">使用したいフォントの種類や特徴はありますか？（複数選択可）</h3>
+            <div class="options">
+              <button type="button" class="option-btn multi-select font-gothic" data-value="ゴシック体">ゴシック体</button>
+              <button type="button" class="option-btn multi-select font-mincho" data-value="明朝体">明朝体</button>
+              <button type="button" class="option-btn multi-select font-maru-gothic" data-value="丸ゴシック">丸ゴシック</button>
+              <button type="button" class="option-btn multi-select font-design" data-value="デザインフォント">デザインフォント</button>
+            </div>
+            <input type="hidden" id="font-preference" name="font-preference">
+            <input type="text" id="font-preference-other" name="font-preference-other" placeholder="特定のフォント名や特徴があれば記入してください" class="mt-3">
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">サイトイメージに合った写真や画像はお持ちですか？</h3>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="has-images" id="has-images-yes" value="あり">
+                <label for="has-images-yes">はい、あります</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="has-images" id="has-images-no" value="なし">
+                <label for="has-images-no">いいえ、新規に用意が必要です</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="has-images" id="has-images-partial" value="一部あり">
+                <label for="has-images-partial">一部あります</label>
+              </div>
+            </div>
+            <textarea id="images-details" name="images-details" placeholder="詳細を記入してください。例: 商品写真はあるが、スタッフ写真は撮影が必要" class="hidden"></textarea>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">モバイル対応で特に重視したい点はありますか？</h3>
+            <div class="form-group">
+              <label for="mobile-priority">モバイル対応で特に重視したい点はありますか？</label>
+              <textarea id="mobile-priority" name="mobile-priority" rows="3" class="hidden" placeholder="例：スマートフォンでの表示を特に重視したい、タブレットでの操作性を向上させたい など"></textarea>
+              <input type="hidden" id="mobile-priorities" name="mobile-priorities">
+              <div class="mobile-options">
+                <button type="button" class="option-btn multi-select" data-value="スマホ最適化表示">スマホ最適化表示</button>
+                <button type="button" class="option-btn multi-select" data-value="タブレット対応">タブレット対応</button>
+                <button type="button" class="option-btn multi-select" data-value="タップ操作の使いやすさ">タップ操作の使いやすさ</button>
+                <button type="button" class="option-btn multi-select" data-value="モバイル読み込み速度">読み込み速度重視</button>
+                <button type="button" class="option-btn multi-select" data-value="スマホ専用機能">スマホ専用機能（位置情報等）</button>
+                <button type="button" class="option-btn multi-select" data-value="レスポンシブ">全デバイス対応（レスポンシブ）</button>
+                <button type="button" class="option-btn multi-select" data-value="モバイルナビゲーション">使いやすいナビゲーション</button>
+                <button type="button" class="option-btn multi-select" data-value="オフライン対応">オフライン利用</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">アニメーションや動的要素の使用についてはどのようにお考えですか？（複数選択可）</h3>
+            <div class="options">
+              <button type="button" class="option-btn multi-select" data-value="積極的に使用">積極的に使用したい</button>
+              <button type="button" class="option-btn multi-select" data-value="控えめに使用">控えめに使用したい</button>
+              <button type="button" class="option-btn multi-select" data-value="必要最小限">必要最小限にしたい</button>
+              <button type="button" class="option-btn multi-select" data-value="使用しない">使用しない</button>
+            </div>
+            <input type="hidden" id="animation-preference" name="animation-preference">
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="back-btn" id="back-btn-3">前へ</button>
+          <button class="home-btn" id="home-btn-3-bottom">TOPページへ戻る</button>
+          <button class="next-btn" id="next-btn-3">次へ</button>
+        </div>
+      </div>
+      
+      <!-- セクション 4: コンテンツと機能 -->
+      <div class="section hidden" id="section-4">
+        <div class="top-navigation">
+          <button class="back-btn" id="back-btn-4-top">前へ</button>
+          <button class="next-btn" id="next-btn-4-top">次へ</button>
+        </div>
+        <div class="question-container">
+          <h2 class="section-title">コンテンツと機能</h2>
+          
+          <div class="question">
+            <h3 class="question-title">サイトに掲載したい主な情報・コンテンツを教えてください</h3>
+            <div class="form-group">
+              <label for="main-content">サイトに掲載したい主な情報・コンテンツを教えてください</label>
+              <textarea id="main-content" name="main-content" rows="4" class="hidden" placeholder="例：会社概要、サービス紹介、製品情報、お問い合わせフォーム など"></textarea>
+              <input type="hidden" id="main-contents" name="main-contents">
+              <div class="content-options">
+                <button type="button" class="option-btn multi-select" data-value="会社概要">会社概要</button>
+                <button type="button" class="option-btn multi-select" data-value="サービス紹介">サービス紹介</button>
+                <button type="button" class="option-btn multi-select" data-value="製品情報">製品情報</button>
+                <button type="button" class="option-btn multi-select" data-value="料金・価格">料金・価格</button>
+                <button type="button" class="option-btn multi-select" data-value="導入事例">導入事例・実績</button>
+                <button type="button" class="option-btn multi-select" data-value="お客様の声">お客様の声</button>
+                <button type="button" class="option-btn multi-select" data-value="スタッフ紹介">スタッフ紹介</button>
+                <button type="button" class="option-btn multi-select" data-value="採用情報">採用情報</button>
+                <button type="button" class="option-btn multi-select" data-value="ニュース・ブログ">ニュース・ブログ</button>
+                <button type="button" class="option-btn multi-select" data-value="お問い合わせ">お問い合わせ</button>
+                <button type="button" class="option-btn multi-select" data-value="よくある質問">よくある質問</button>
+                <button type="button" class="option-btn multi-select" data-value="アクセス・地図">アクセス・地図</button>
+                <button type="button" class="option-btn multi-select" data-value="オンラインショップ">オンラインショップ</button>
+                <button type="button" class="option-btn multi-select" data-value="予約システム">予約システム</button>
+                <button type="button" class="option-btn multi-select" data-value="会員ページ">会員専用ページ</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">どのような機能が必要ですか？</h3>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="function-contact" name="functions[]" value="問い合わせフォーム">
+                <label for="function-contact">問い合わせフォーム</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="function-reservation" name="functions[]" value="予約システム">
+                <label for="function-reservation">予約システム</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="function-map" name="functions[]" value="地図・アクセス">
+                <label for="function-map">地図・アクセス</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="function-search" name="functions[]" value="サイト内検索">
+                <label for="function-search">サイト内検索</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="function-login" name="functions[]" value="会員ログイン">
+                <label for="function-login">会員ログイン</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="function-blog" name="functions[]" value="ブログ・ニュース機能">
+                <label for="function-blog">ブログ・ニュース機能</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="function-gallery" name="functions[]" value="ギャラリー・スライダー">
+                <label for="function-gallery">ギャラリー・スライダー</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="function-sns" name="functions[]" value="SNS連携">
+                <label for="function-sns">SNS連携</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="function-other" name="functions[]" value="その他">
+                <label for="function-other">その他</label>
+              </div>
+            </div>
+            <textarea id="function-other-detail" name="function-other-detail" placeholder="その他の機能があれば記入してください" class="hidden"></textarea>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">多言語対応は必要ですか？</h3>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="multilingual" id="multilingual-yes" value="必要">
+                <label for="multilingual-yes">はい、必要です</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="multilingual" id="multilingual-no" value="不要">
+                <label for="multilingual-no">いいえ、必要ありません</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="multilingual" id="multilingual-future" value="将来的に検討">
+                <label for="multilingual-future">将来的に検討したい</label>
+              </div>
+            </div>
+            <textarea id="multilingual-details" name="multilingual-details" placeholder="必要な言語や詳細があれば記入してください" class="hidden"></textarea>
+          </div>
+          
+          <div class="question">
+            <h3 class="question-title">更新頻度はどのくらいを想定していますか？</h3>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="update-frequency" id="update-daily" value="ほぼ毎日">
+                <label for="update-daily">ほぼ毎日</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="update-frequency" id="update-weekly" value="週1回程度">
+                <label for="update-weekly">週1回程度</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="update-frequency" id="update-monthly" value="月1回程度">
+                <label for="update-monthly">月1回程度</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="update-frequency" id="update-rarely" value="ほとんど更新しない">
+                <label for="update-rarely">ほとんど更新しない</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="back-btn" id="back-btn-4">前へ</button>
+          <button class="home-btn" id="home-btn-4-bottom">TOPページへ戻る</button>
+          <button class="next-btn" id="next-btn-4">次へ</button>
+        </div>
+      </div>
+      
+      <!-- 製品・サービス情報セクション -->
+      <div class="section hidden" id="section-5">
+        <div class="top-navigation">
+            <button class="back-btn" id="back-btn-5-top">前へ</button>
+            <button class="next-btn" id="next-btn-5-top">次へ</button>
+        </div>
+        <div class="question-container">
+            <h2 class="section-title">製品・サービス情報</h2>
+            <div class="question">
+                <label for="product-name">主力製品・サービスの名称と概要を教えてください</label>
+                <textarea id="product-name" name="product-name" rows="3"></textarea>
+            </div>
+            <div class="question">
+                <label class="question-title">製品・サービスの主な特徴や強みは何ですか？</label>
+                <div id="product-features-container">
+                    <textarea id="product-features" name="product-features" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="question">
+                <label for="pricing-info">価格体系や料金表は掲載しますか？</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="pricing-info" id="pricing-yes" value="はい">
+                        <label for="pricing-yes">はい</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="pricing-info" id="pricing-no" value="いいえ">
+                        <label for="pricing-no">いいえ</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-title">製品・サービスのカテゴリ分類はどのようにしますか？</label>
+                <div id="product-category-container">
+                    <input type="text" id="product-category" name="product-category">
+                </div>
+            </div>
+            <div class="question">
+                <label for="product-materials">製品画像や説明資料は用意されていますか？</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="product-materials" id="materials-yes" value="はい">
+                        <label for="materials-yes">はい</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="product-materials" id="materials-no" value="いいえ">
+                        <label for="materials-no">いいえ</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="case-studies">導入事例やお客様の声は掲載しますか？あればいくつか教えてください</label>
+                <textarea id="case-studies" name="case-studies" rows="3"></textarea>
+            </div>
+            <div class="question">
+                <label for="detailed-info">製品比較表や仕様一覧など、詳細情報は必要ですか？</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="detailed-info" id="detailed-yes" value="はい">
+                        <label for="detailed-yes">はい</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="detailed-info" id="detailed-no" value="いいえ">
+                        <label for="detailed-no">いいえ</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="service-area">サービス提供エリアや対象地域はありますか？</label>
+                <input type="text" id="service-area" name="service-area">
+            </div>
+        </div>
+        <div class="navigation">
+            <button class="back-btn" id="back-btn-5">前へ</button>
+            <button class="home-btn" id="home-btn-5-bottom">TOPページへ戻る</button>
+            <button class="next-btn" id="next-btn-5">次へ</button>
+        </div>
+      </div>
+
+      <!-- 技術・運用面セクション -->
+      <div class="section hidden" id="section-6">
+        <div class="top-navigation">
+            <button class="back-btn" id="back-btn-6-top">前へ</button>
+            <button class="next-btn" id="next-btn-6-top">次へ</button>
+        </div>
+        <div class="question-container">
+            <h2 class="section-title">技術・運用面</h2>
+            <div class="question">
+                <label for="domain-name">希望するドメイン名はありますか？既にお持ちですか？</label>
+                <input type="text" id="domain-name" name="domain-name">
+            </div>
+            <div class="question">
+                <label for="seo-keywords">SEO対策で特に重視したいキーワードはありますか？</label>
+                <input type="text" id="seo-keywords" name="seo-keywords">
+            </div>
+            <div class="question">
+                <label class="question-title">サイト完成後の更新・管理は誰が担当しますか？</label>
+                <div id="site-management-container">
+                    <input type="hidden" id="site-management" name="site-management">
+                </div>
+            </div>
+        </div>
+        <div class="navigation">
+            <button class="back-btn" id="back-btn-6">前へ</button>
+            <button class="home-btn" id="home-btn-6-bottom">TOPページへ戻る</button>
+            <button class="next-btn" id="next-btn-6">次へ</button>
+        </div>
+      </div>
+
+      <!-- 最終セクション: 結果表示 -->
+      <div class="section hidden" id="section-7">
+        <div class="top-navigation">
+           <button class="back-btn" id="back-btn-7-top">前へ</button>
+        </div>
+        <div class="question-container">
+          <h2 class="section-title">ヒアリング結果</h2>
+          
+          <div id="summary-content">
+            <!-- JavaScriptで動的に生成される結果が表示される場所 -->
+          </div>
+          
+          <div class="navigation">
+             <button class="back-btn" id="back-btn-7">前へ</button>
+              <button class="home-btn" id="home-btn-7-bottom">TOPページへ戻る</button>
+              <button class="print-btn" id="print-btn">印刷する</button>
+              <button class="download-btn" id="download-btn">PDFでダウンロード</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- PDF生成用ライブラリ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="scripts.js"></script>
+  
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 komohanaworks. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
